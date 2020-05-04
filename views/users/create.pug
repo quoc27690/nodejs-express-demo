@@ -1,0 +1,31 @@
+extends ../../layouts/common
+
+block content
+
+  h1 Create User  
+
+  if errors
+    each error in errors
+      div(class='alert alert-danger')= error
+
+  form(action="/users/create", method='POST', enctype="multipart/form-data")
+    div(class='form-group')
+      label Name
+      input(type="text", name='name', class='form-control', value= values ? values.name : '')
+      label Email
+      input(type="text", name='email', class='form-control', value= values ? values.email : '')
+      label Password
+      input(type="text", name='password', class='form-control', value= values ? values.password : '')
+      label Avatar
+      input(type="file", name='avatar', class='form-control-file')
+    label isAdmin
+    .form-check
+      input#exampleRadios1.form-check-input(type='radio', name='isAdmin', value='true', checked='')
+      label.form-check-label(for='exampleRadios1')
+        | true
+    .form-check
+      input#exampleRadios2.form-check-input(type='radio', name='isAdmin', value='false')
+      label.form-check-label(for='exampleRadios2')
+        | false
+
+    button(class='btn btn-primary') Create

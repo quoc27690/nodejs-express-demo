@@ -1,0 +1,27 @@
+extends ../../layouts/common
+
+block content
+
+  h1 Edit Book
+
+  form(action="/books/edit", method='POST')
+    table
+      tr
+        td
+          label ID
+        td
+          input(type="text", name='id', value=book.id)
+      tr
+        td
+          label Title
+        td
+          input(type="text", name='title', value=book.title)
+      tr
+        td
+          label Description
+        td
+          input(type="text", name='description', value=book.description)
+      tr
+        td
+        td
+          button Edit

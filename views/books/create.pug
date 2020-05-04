@@ -1,0 +1,21 @@
+extends ../../layouts/common
+
+block content
+  h1 Create Book
+
+  form(action="/books/create", method='POST')
+    table
+      tr  
+        td
+          label Title
+        td
+          input(type="text", name='title')
+      tr  
+        td
+          label Description
+        td
+          input(type="text", name='description')
+      tr  
+        td
+        td
+          button Create

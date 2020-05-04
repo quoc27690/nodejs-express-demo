@@ -1,0 +1,59 @@
+extends ../../layouts/common
+
+block content
+
+  h1 Books
+
+  div(class='d-flex')
+    h4
+      a(href="/", class='btn btn-primary mr-3') Back Home
+    h4
+      a(href="/books/create", class='btn btn-info mr-3') Create New A Book
+    h4
+      a(href="/books/", class='btn btn-success') Show All Books
+    h5(class="ml-auto")
+      span(class="text-primary") Cart (#{count ? count : 0})
+    form(action="/transactions/create", method="POST")
+      button(class="btn btn-primary ml-3") Hire
+    
+
+  div(class='d-flex')
+    form.form-inline(action="/books/search",method='GET')
+      .form-group
+        input(type="text", name='q', placeholder='Search With Title', class="form-control", value= q ? q : "")
+        button(class='btn btn-primary ml-3') Search
+    
+  .container 
+    .row.justify-content-around
+      each book in books
+        .card(class='col-md-4 mt-3')
+          img.card-img-top(src='https://loremflickr.com/320/240/dog', alt='Card image cap')
+          .card-body
+            h5.card-title= book.title
+            a(href="/books/" + book.id, class='btn btn-success mr-3') View
+            a(href="/books/" + book.id + '/edit', class='btn btn-info mr-3') Edit
+            a(href="/books/" + book.id + "/delete", class='btn btn-warning mr-3') Delete
+            a(href="/cart/add/" + book.id, class='btn btn-primary') add
+  br
+  nav.mt-3
+    ul.pagination.justify-content-center
+      li.page-item
+          a.page-link(href='/books?page=1') First
+      li.page-item(class= page === 1 ? 'disabled' : '')
+        a.page-link(href='/books?page=' + (page - 1)) &laquo
+      if (page === 1 || page === 2) 
+        - for (let i = 1; i <= 3; i++)
+          li.page-item(class= page === i ? 'active' : '')
+            a.page-link(href='/books?page=' + i)= i
+      else if (page == numberPage -1 || page == numberPage)
+        - for (let i = 2; i >= 0; i--)
+          li.page-item(class= page === (numberPage - i) ? 'active' : '')
+            a.page-link(href='/books?page=' + (numberPage - i))= numberPage - i
+      else      
+        - for (let i = page - 1; i <= page + 1; i++)
+            li.page-item(class= page === i ? 'active' : '')
+              a.page-link(href='/books?page=' + i)= i
+      li.page-item(class= page === numberPage ? 'disabled' : '')
+        a.page-link(href='/books?page=' + (page + 1)) &raquo
+      li.page-item
+          a.page-link(href='/books?page=' + numberPage) Last

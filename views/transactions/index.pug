@@ -1,0 +1,48 @@
+extends ../../layouts/common
+
+block content
+
+  h1 Transactions
+
+  h4
+    a(href="/", class='btn btn-primary') Back Home
+  
+  table.table.table-hover.my-3
+    tr
+      th Book Title
+      th User Name
+      th Status
+    each transaction in transactions
+      tr
+        td= transaction.bookTitle
+        td= transaction.userName
+        if transaction.isComplete 
+          td
+            a.btn.btn-primary(href="/transactions/" + transaction.id +"/complete") isComplete
+        else
+          td
+            a.btn.btn-danger(href="/transactions/" + transaction.id +"/complete") isNotComplete
+  br
+  nav.mt-3
+    ul.pagination.justify-content-center
+      li.page-item
+          a.page-link(href='/transactions?page=1') First
+      li.page-item(class= page === 1 ? 'disabled' : '')
+        a.page-link(href='/transactions?page=' + (page - 1)) &laquo
+      if (page === 1 || page === 2) 
+        - for (let i = 1; i <= 3; i++)
+          li.page-item(class= page === i ? 'active' : '')
+            a.page-link(href='/transactions?page=' + i)= i
+      else if (page == numberPage -1 || page == numberPage)
+        - for (let i = 2; i >= 0; i--)
+          li.page-item(class= page === (numberPage - i) ? 'active' : '')
+            a.page-link(href='/transactions?page=' + (numberPage - i))= numberPage - i
+      else      
+        - for (let i = page - 1; i <= page + 1; i++)
+            li.page-item(class= page === i ? 'active' : '')
+              a.page-link(href='/transactions?page=' + i)= i
+      li.page-item(class= page === numberPage ? 'disabled' : '')
+        a.page-link(href='/transactions?page=' + (page + 1)) &raquo
+      li.page-item
+          a.page-link(href='/transactions?page=' + numberPage) Last
+    
