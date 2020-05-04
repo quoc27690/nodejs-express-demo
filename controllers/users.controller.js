@@ -1,6 +1,13 @@
 var User = require("../models/user.model");
 
 const bcrypt = require("bcrypt");
+var cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+});
 
 module.exports.index = async (req, res) => {
   var users = await User.find();
@@ -25,18 +32,17 @@ module.exports.search = async (req, res) => {
 };
 
 module.exports.create = (req, res) => {
-  // Test cookie
-  console.log(req.cookies);
-
   res.render("users/create");
 };
 module.exports.postCreate = async (req, res) => {
+  let file = await cloudinary.uploader.upload(req.file.path);
+
   await User.create({
     name: req.body.name,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 10),
     isAdmin: req.body.isAdmin,
-    avatar: req.file.path.split("\\").slice(1).join("\\"),
+    avatar: file.url,
     wrongLoginCount: 0,
   });
 
@@ -55,10 +61,7 @@ module.exports.edit = async (req, res) => {
 module.exports.postEdit = async (req, res) => {
   var id = req.body.id;
 
-  await User.findByIdAndUpdate(
-    { _id: id },
-    { name: req.body.name }
-  );
+  await User.findByIdAndUpdate({ _id: id }, { name: req.body.name });
 
   res.redirect("/users");
 };

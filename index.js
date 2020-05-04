@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000;
 var cookieParser = require("cookie-parser");
 var mongoose = require("mongoose");
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI_ATLAS, { useNewUrlParser: true });
 
 const booksRoutes = require("./routes/books.route");
 const usersRoutes = require("./routes/users.route");
