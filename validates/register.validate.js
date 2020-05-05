@@ -15,7 +15,7 @@ module.exports.postCreate = (req, res, next) => {
 
   // Truyền "values: req.body" để khi enter ko bị mất dữ liệu nhập
   if (errors.length) {
-    res.render("users/create", { errors: errors, values: req.body });
+    res.render("auth/register", { errors: errors, values: req.body });
     return;
   }
   next();

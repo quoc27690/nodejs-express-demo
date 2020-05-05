@@ -1,6 +1,13 @@
 var User = require("../models/user.model");
 
 const bcrypt = require("bcrypt");
+var cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+});
 
 module.exports.login = (req, res) => res.render("auth/login");
 
@@ -45,5 +52,23 @@ module.exports.postLogin = async (req, res) => {
   });
   // Tạo cookie userId khi đăng nhập đúng
   res.cookie("userId", user.id, { signed: true });
+  res.redirect("/");
+};
+
+
+module.exports.register = (req, res) => res.render("auth/register");
+
+module.exports.postRegister = async (req, res) => {
+  let file = await cloudinary.uploader.upload(req.file.path);
+
+  await User.create({
+    name: req.body.name,
+    email: req.body.email,
+    password: bcrypt.hashSync(req.body.password, 10),
+    isAdmin: req.body.isAdmin,
+    avatar: file.url,
+    wrongLoginCount: 0,
+  });
+
   res.redirect("/");
 };

@@ -4,7 +4,7 @@ html
     link(rel="stylesheet", href='/custom.css')
   body
     nav.navbar.navbar-expand-lg.navbar-light.bg-light
-        a.navbar-brand(href='#') Navbar
+        a.navbar-brand(href='#') Quoc's Books
         button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavAltMarkup', aria-controls='navbarNavAltMarkup', aria-expanded='false', aria-label='Toggle navigation')
             span.navbar-toggler-icon
         #navbarNavAltMarkup.collapse.navbar-collapse
@@ -17,7 +17,7 @@ html
             a.nav-item.nav-link(href='/transactions') Transactions
             a.nav-item.nav-link(href='/auth/login') Login
         if user  
-          p= user.name
+          h4= user.name
 
     .container.pt-5
         block content
