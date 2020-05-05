@@ -26,7 +26,7 @@ block content
       tr
         td
           if user.avatar
-            img(src= user.avatar, width="50", class='rounded-circle')
+            img.rounded(src= user.avatar width="64" height="64")
           else
             img.rounded(src="https://res.cloudinary.com/dnsdasaly/image/upload/v1587889811/r0xxbnrirt87mikftelt.jpg" width="64" height="64")
         td(class='align-middle')
