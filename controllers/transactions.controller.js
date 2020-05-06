@@ -16,9 +16,9 @@ module.exports.index = async (req, res) => {
   var end = page * perPage;
 
   if (res.locals.user.isAdmin === "true") {
-    let changeTrans = transactions.map((trans) => {
-      let book = books.find((book) => book.id === trans.bookId.toString());
-      let user = users.find((user) => user.id === trans.userId.toString());
+    var changeTrans = transactions.map((trans) => {
+      var book = books.find((book) => book.id === trans.bookId.toString());
+      var user = users.find((user) => user.id === trans.userId.toString());
       return {
         bookTitle: book.title,
         userName: user.name,
@@ -38,12 +38,12 @@ module.exports.index = async (req, res) => {
     return;
   }
 
-  let memberTrans = transactions.filter((trans) => {
+  var memberTrans = transactions.filter((trans) => {
     return trans.userId.toString() === res.locals.user.id;
   });
 
-  let changeTrans = memberTrans.map((trans) => {
-    let book = books.find((book) => book.id === trans.bookId.toString());
+  var changeTrans = memberTrans.map((trans) => {
+    var book = books.find((book) => book.id === trans.bookId.toString());
 
     return {
       bookTitle: book.title,
@@ -63,11 +63,11 @@ module.exports.index = async (req, res) => {
 };
 
 module.exports.createCart = async (req, res) => {
-  let session = await Session.findById(req.signedCookies.sessionId);
+  var session = await Session.findById(req.signedCookies.sessionId);
 
   if (session) {
-    for (let book of session.cart) {
-      for (let i = 0; i < book.quantity; i++) {
+    for (var book of session.cart) {
+      for (var i = 0; i < book.quantity; i++) {
         await Transaction.create({
           bookId: book.bookId,
           userId: req.signedCookies.userId,
@@ -83,7 +83,7 @@ module.exports.createCart = async (req, res) => {
 };
 
 module.exports.complete = async (req, res) => {
-  let id = req.params.id;
+  var id = req.params.id;
 
   await Transaction.findByIdAndUpdate(id, { isComplete: true });
 

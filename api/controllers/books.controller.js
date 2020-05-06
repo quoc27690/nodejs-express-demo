@@ -7,7 +7,6 @@ module.exports.index = async (req, res) => {
 };
 
 module.exports.create = async (req, res) => {
-  console.log(req.body)
   var book = await Book.create({
     title: req.body.title,
     description: req.body.description

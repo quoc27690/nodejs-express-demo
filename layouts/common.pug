@@ -16,7 +16,8 @@ html
             a.nav-item.nav-link(href='/users') Users
             a.nav-item.nav-link(href='/transactions') Transactions
             a.nav-item.nav-link(href='/auth/login') Login
-        if user  
+        if user
+          img.rounded(src= user.avatar width="30" height="30")
           h4= user.name
 
     .container.pt-5

@@ -70,5 +70,5 @@ module.exports.postRegister = async (req, res) => {
     wrongLoginCount: 0,
   });
 
-  res.redirect("/");
+  res.redirect("/auth/login");
 };
