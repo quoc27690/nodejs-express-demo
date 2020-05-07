@@ -6,7 +6,10 @@ const port = process.env.PORT || 3000;
 var cookieParser = require("cookie-parser");
 var mongoose = require("mongoose");
 
-mongoose.connect(process.env.MONGODB_URI_ATLAS, { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI_ATLAS, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const booksRoutes = require("./routes/books.route");
 const usersRoutes = require("./routes/users.route");
@@ -54,11 +57,7 @@ app.use(
   adminMiddleware.requireAdmin,
   usersRoutes
 );
-app.use(
-  "/transactions",
-  authMiddleware.requireAuth,
-  transactionsRoutes
-);
+app.use("/transactions", authMiddleware.requireAuth, transactionsRoutes);
 app.use("/auth", authRoutes);
 app.use("/cart", cartRoutes);
 app.use("/api/books", apiBooksRoutes);
