@@ -3,6 +3,6 @@ var router = express.Router();
 
 const exchangeController = require("../controllers/exchange.controller");
 
-router.get("/", exchangeController.value);
+router.get("/", exchangeController.getValue);
 
 module.exports = router;
