@@ -48,13 +48,12 @@ module.exports.postLogin = async (req, res) => {
   }
   // Reset wrongLoginCount : 0 khi đăng nhập đúng
   await User.findByIdAndUpdate(user.id, {
-    wrongLoginCount: 0
+    wrongLoginCount: 0,
   });
   // Tạo cookie userId khi đăng nhập đúng
   res.cookie("userId", user.id, { signed: true });
   res.redirect("/");
 };
-
 
 module.exports.register = (req, res) => res.render("auth/register");
 
