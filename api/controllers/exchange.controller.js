@@ -16,5 +16,5 @@ function exchange(amount, from, to) {
 module.exports.getValue = async (req, res) => {
   const { amount, from, to } = req.query;
   const returnedAmount = exchange(Number(amount), from, to);
-  res.send(`Returned Amount: ${returnedAmount}`);
+  res.send({ returnedAmount });
 };
