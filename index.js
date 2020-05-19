@@ -21,6 +21,7 @@ const cartRoutes = require("./routes/cart.route");
 const apiBooksRoutes = require("./api/routes/books.route");
 const apiAuthRoutes = require("./api/routes/auth.route");
 const apiTransactionsRoutes = require("./api/routes/transactions.route");
+const apiExchangeRoutes = require("./api/routes/exchange.route");
 
 const authMiddleware = require("./middlewares/auth.middleware");
 const adminMiddleware = require("./middlewares/admin.middleware");
@@ -67,6 +68,7 @@ app.use("/cart", cartRoutes);
 app.use("/api/books", apiBooksRoutes);
 app.use("/api/auth/login", apiAuthRoutes);
 app.use("/api/transactions", apiTransactionsRoutes);
+app.use("/api/exchange", apiExchangeRoutes);
 
 app.listen(port, () =>
   console.log(`Example app listening at http://localhost:${port}`)
