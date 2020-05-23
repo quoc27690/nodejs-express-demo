@@ -19,6 +19,7 @@ const authRoutes = require("./routes/auth.route");
 const cartRoutes = require("./routes/cart.route");
 
 const apiBooksRoutes = require("./api/routes/books.route");
+const apiProductsRoutes = require("./api/routes/products.route");
 const apiAuthRoutes = require("./api/routes/auth.route");
 const apiTransactionsRoutes = require("./api/routes/transactions.route");
 const apiExchangeRoutes = require("./api/routes/exchange.route");
@@ -66,6 +67,7 @@ app.use("/transactions", authMiddleware.requireAuth, transactionsRoutes);
 app.use("/auth", authRoutes);
 app.use("/cart", cartRoutes);
 app.use("/api/books", apiBooksRoutes);
+app.use("/api/products", apiProductsRoutes);
 app.use("/api/auth/login", apiAuthRoutes);
 app.use("/api/transactions", apiTransactionsRoutes);
 app.use("/api/exchange", apiExchangeRoutes);
