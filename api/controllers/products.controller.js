@@ -8,8 +8,7 @@ module.exports.index = async (req, res) => {
 
 module.exports.create = async (req, res) => {
   var product = await Product.create({
-    name: req.body,
-    name,
+    name: req.body.name,
     price: req.body.price,
     status: req.body.status,
   });
