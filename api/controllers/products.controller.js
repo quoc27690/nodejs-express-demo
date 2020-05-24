@@ -27,7 +27,7 @@ module.exports.deleteId = async (req, res) => {
 module.exports.putId = async (req, res) => {
   var id = req.params.id;
 
-  product = await Product.findByIdAndUpdate(
+  await Product.findByIdAndUpdate(
     { _id: id },
     {
       name: req.body.name,
@@ -35,6 +35,8 @@ module.exports.putId = async (req, res) => {
       status: req.body.status,
     }
   );
+
+  product = await Product.findById({ _id: id });
 
   res.json(product);
 };
