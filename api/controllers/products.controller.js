@@ -14,6 +14,16 @@ module.exports.getId = async (req, res) => {
   res.json(product);
 };
 
+module.exports.getIdDelete = async (req, res) => {
+  var id = req.params.id;
+
+  var products = await Product.find();
+
+  await Product.findByIdAndDelete({ _id: id });
+
+  res.json(products);
+};
+
 module.exports.create = async (req, res) => {
   var product = await Product.create({
     name: req.body.name,
