@@ -17,9 +17,9 @@ module.exports.getId = async (req, res) => {
 module.exports.deleteId = async (req, res) => {
   var id = req.params.id;
 
-  var products = await Product.find();
-
   await Product.findByIdAndDelete({ _id: id });
+
+  var products = await Product.find();
 
   res.json(products);
 };
