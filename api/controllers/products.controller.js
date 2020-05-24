@@ -1,6 +1,6 @@
 var Product = require("../../models/product.model");
 
-module.exports.index = async (req, res) => {
+module.exports.getIndex = async (req, res) => {
   var products = await Product.find();
 
   res.json(products);
@@ -14,7 +14,7 @@ module.exports.getId = async (req, res) => {
   res.json(product);
 };
 
-module.exports.getIdDelete = async (req, res) => {
+module.exports.deleteId = async (req, res) => {
   var id = req.params.id;
 
   var products = await Product.find();
@@ -24,7 +24,7 @@ module.exports.getIdDelete = async (req, res) => {
   res.json(products);
 };
 
-module.exports.create = async (req, res) => {
+module.exports.postCreate = async (req, res) => {
   var product = await Product.create({
     name: req.body.name,
     price: req.body.price,
