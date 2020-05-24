@@ -24,6 +24,21 @@ module.exports.deleteId = async (req, res) => {
   res.json(products);
 };
 
+module.exports.putId = async (req, res) => {
+  var id = req.params.id;
+
+  product = await Product.findByIdAndUpdate(
+    { _id: id },
+    {
+      name: req.body.name,
+      price: req.body.price,
+      status: req.body.status,
+    }
+  );
+
+  res.json(product);
+};
+
 module.exports.postCreate = async (req, res) => {
   var product = await Product.create({
     name: req.body.name,
