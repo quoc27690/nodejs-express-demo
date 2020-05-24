@@ -7,7 +7,7 @@ router.get("/", productsController.getIndex);
 
 router.get("/:id", productsController.getId);
 
-router.delete("/:id/delete", productsController.deleteId);
+router.delete("/:id", productsController.deleteId);
 
 router.post("/", productsController.postCreate);
 
