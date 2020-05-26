@@ -36,9 +36,9 @@ module.exports.putId = async (req, res) => {
     }
   );
 
-  product = await Product.findById({ _id: id });
+  var products = await Product.find();
 
-  res.json(product);
+  res.json(products);
 };
 
 module.exports.postCreate = async (req, res) => {
@@ -48,5 +48,7 @@ module.exports.postCreate = async (req, res) => {
     status: req.body.status,
   });
 
-  res.json(product);
+  var products = await Product.find();
+
+  res.json(products);
 };
